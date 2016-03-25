@@ -2,8 +2,8 @@
 # file: roles/apache2/tasks/main.yml
 
 - name: Use correct Apache security configuration filename
-  set_fact: apache2_sec_conf="{{ '/etc/apache2/conf-available/security.conf' if ((ansible_distribution == 'Debian') and (ansible_distribution_version >= '8')) else '/etc/apache2/conf.d/security' }}"
-
+  set_fact: apache2_sec_conf="{{ '/etc/apache2/conf-available/security.conf' if (((ansible_distribution == 'Debian') and (ansible_distribution_version >= '8'))) or (((ansible_distribution == 'Ubuntu') and (ansible_distribution_version >= '14.04'))) else '/etc/apache2/conf.d/security' }}"
+  
 - name: Use correct Apache default sitename
   set_fact: apache2_default_site="{{ '000-default' if ((ansible_distribution == 'Debian') and (ansible_distribution_version >= '8')) else 'default' }}"
 
